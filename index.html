@@ -25,6 +25,22 @@
         </ul>
       </nav>
     </header>
+     <button class="hamburger" id="hamburger" aria-label="Меню">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+    <nav class="dropdown-menu" id="dropdownMenu">
+      <ul class="dropdown-menu__list">
+        <li><a href="#home" class="dropdown-menu__link">COFFEE</a></li>
+        <li><a href="#about" class="dropdown-menu__link">PHIN MẠ MÀU</a></li>
+        <li><a href="#menu" class="dropdown-menu__link">COMBO PHIN PHÊ</a></li>
+        <li>
+          <a href="#description" class="dropdown-menu__link">GIFTSET</a>
+        </li>
+        <li><a href="#combo" class="dropdown-menu__link">LIÊN HỆ</a></li>
+      </ul>
+    </nav>
     <main class="main">
       <section class="home" id="home">
         <div class="home-wrapper">
@@ -268,32 +284,39 @@
     </main>
     <script>
       document.addEventListener("DOMContentLoaded", function () {
-        const header = document.querySelector(".header");
-        const homeSection = document.querySelector(".home");
+        const hamburger = document.getElementById("hamburger");
+        const dropdownMenu = document.getElementById("dropdownMenu");
 
-        const observer = new IntersectionObserver(
-          (entries) => {
-            entries.forEach((entry) => {
-              // intersectionRatio - сколько процентов home видно (от 0 до 1)
-              const visibility = entry.intersectionRatio;
+        // Открытие/закрытие выпадающего меню
+        hamburger.addEventListener("click", function (e) {
+          e.stopPropagation(); // Предотвращаем всплытие
+          this.classList.toggle("active");
+        });
 
-              // Прозрачность = проценту видимости home
-              header.style.opacity = visibility;
-
-              // Можно добавить минимальную прозрачность чтобы не исчезал полностью
-              // header.style.opacity = Math.max(visibility, 0.3);
-            });
-          },
-          {
-            threshold: Array.from({ length: 101 }, (_, i) => i * 0.01), // 0%, 1%, 2%... 100%
+        // Закрытие меню при клике вне его
+        document.addEventListener("click", function (event) {
+          if (
+            !hamburger.contains(event.target) &&
+            !dropdownMenu.contains(event.target)
+          ) {
+            hamburger.classList.remove("active");
           }
-        );
+        });
 
-        observer.observe(homeSection);
+        // Закрытие при клике на ссылку в меню
+        document.querySelectorAll(".dropdown-menu__link").forEach((link) => {
+          link.addEventListener("click", function () {
+            hamburger.classList.remove("active");
+          });
+        });
       });
+
+      
+      
     </script>
     <footer class="footer">
       <p>&copy; Revo Cof fee Việt Nam - 2018.</p>
     </footer>
+   
   </body>
 </html>

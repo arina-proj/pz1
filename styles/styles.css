@@ -49,58 +49,96 @@ body {
   position: relative;
   background-color: var(--bg);
 }
-@media (max-width: 1280px) {
-  body {
-    font-size: 12px;
-  }
-}
 
 .header {
+  /* Вертикальный сайдбар справа */
   background-color: var(--primary);
   color: white;
   padding: 20px;
-  width: 22%;
-  height: 100vh;
-  position: fixed;
-  right: 0;
-  top: 0;
+  width: 22%; /* Ширина сайдбара */
+  height: 100vh; /* На всю высоту экрана */
+  position: fixed; /* Фиксированное позиционирование */
+  right: 0; /* Прижимаем к правому краю */
+  top: 0; /* От верхнего края */
   display: flex;
-  flex-direction: column;
+  flex-direction: column; /* Вертикальное расположение */
   padding-top: 85px;
   padding-left: 60px;
   padding-right: 80px;
   z-index: 1000;
-  opacity: 1; /* начальная прозрачность */
+  opacity: 1;
   transition: opacity 0.2s ease;
 
-  .header_img {
-    margin-bottom: 110px;
-  }
-  .header_h1 {
-    font-size: 15px;
-    font-weight: 500;
-    margin-bottom: 35px;
-  }
-  .header-ul_item {
-    margin-bottom: 27px;
-  }
-  .header-ul_item:hover {
-    font-size: 16px;
-  }
+  /* Чтобы не конфликтовало с контентом */
+  box-sizing: border-box;
+}
+
+/* Логотип/иконка вверху */
+.header_img {
+  margin-bottom: 110px;
+  width: 30px; /* Фиксируем размер */
+  height: 30px;
+}
+
+/* Заголовок меню */
+.header_h1 {
+  font-size: 15px;
+  font-weight: 500;
+  margin-bottom: 35px;
+  color: white;
+}
+
+/* Навигационное меню */
+.header nav {
+  flex-grow: 1; /* Занимает доступное пространство */
+}
+
+.header nav ul {
+  display: flex;
+  flex-direction: column; /* Вертикальный список */
+  gap: 27px; /* Отступы между пунктами */
+}
+
+.header-ul_item {
+  margin-bottom: 27px;
+}
+
+.header-ul_item:last-child {
+  margin-bottom: 0;
+}
+
+.header-ul_item a {
+  color: white;
+  text-decoration: none;
+  font-size: 15px;
+  font-weight: 300;
+  transition: all 0.3s ease;
+  display: block;
+}
+
+.header-ul_item:hover a {
+  font-size: 16px;
+  color: var(--accent);
+  transform: translateX(5px);
 }
 
 body.show-header .header {
   display: flex;
 }
 .main {
+  background-color: var(--bg);
+  width: 78%; /* 100% - 22% (ширина сайдбара) */
+  margin-right: 22%; /* Отступ справа под сайдбар */
+  float: left; /* Обтекание слева */
   .home {
+    width: 100%;
     margin-bottom: 100px;
     flex: 1;
     display: flex;
     justify-content: space-between;
-    width: calc(100% - 300px);
+
     .home-wrapper {
-      margin-left: 200px;
+      margin-left: 100px;
       display: flex;
       flex-direction: column;
       justify-content: space-around;
@@ -129,6 +167,7 @@ body.show-header .header {
       z-index: -1;
       filter: brightness(80%) contrast(160%) saturate(100%);
       height: 100vh;
+      margin-right: 15%;
     }
   }
   .about {
@@ -159,11 +198,14 @@ body.show-header .header {
     padding-bottom: 100px;
     margin: 0 auto;
     position: relative;
+    background-color: var(--bg);
     .menu_wrapper {
       display: flex;
+      position: relative;
       flex-wrap: wrap;
       gap: 40px;
       justify-content: center;
+      z-index: 3;
       .menu_point {
         display: flex;
         background-color: #fff;
@@ -183,7 +225,7 @@ body.show-header .header {
   }
 
   .description {
-    z-index: -2;
+    z-index: 1;
     padding-top: 85px;
     position: relative;
     text-align: center;
@@ -267,6 +309,7 @@ body.show-header .header {
   .combo {
     position: relative;
     padding: 100px 0;
+    background-color: var(--bg);
     text-align: center;
     .combo_wrapper {
       display: flex;
@@ -303,44 +346,13 @@ body.show-header .header {
 }
 
 .footer {
+  width: 78%;
   background-color: rgb(238, 240, 245);
   text-align: center;
   color: black;
-  padding: 25px 0;
-}
-.menu::after {
-  background-color: var(--primary);
-  width: 285px;
-  height: 100%;
-  position: absolute;
-  left: 0;
-  top: 0;
-  content: "";
-  z-index: -70;
-}
-
-.menu::before {
-  content: "";
-  position: absolute;
-  right: 60px;
-  top: 380px;
-  width: 40px; /* размер круга */
-  height: 40px;
-  background-color: var(--accent); /* цвет круга */
-  border-radius: 50%; /* делаем круг */
-}
-
-.menu .arrow {
-  content: "";
-  position: absolute;
-  right: 76px; /* центрируем стрелку в круге */
-  top: 393px;
-  width: 12px;
-  height: 12px;
-  border-top: 2px solid white; /* белая стрелка */
-  border-right: 2px solid white;
-  transform: rotate(45deg);
-  z-index: 900;
+  padding-top: 100px;
+  > p {
+  }
 }
 
 .description::after {
@@ -348,7 +360,7 @@ body.show-header .header {
   position: absolute;
   right: 0;
   top: 0;
-  height: 100vh;
+  height: 100%;
   background-color: var(--bg);
   z-index: -1;
   width: 27%;
@@ -363,30 +375,6 @@ body.show-header .header {
   top: 0;
   content: "";
   z-index: -70;
-}
-
-.combo::before {
-  content: "";
-  position: absolute;
-  right: 60px;
-  top: 520px;
-  width: 40px; /* размер круга */
-  height: 40px;
-  background-color: var(--accent); /* цвет круга */
-  border-radius: 50%; /* делаем круг */
-}
-
-.combo .arrow {
-  content: "";
-  position: absolute;
-  right: 76px; /* центрируем стрелку в круге */
-  top: 533px;
-  width: 12px;
-  height: 12px;
-  border-top: 2px solid white; /* белая стрелка */
-  border-right: 2px solid white;
-  transform: rotate(45deg);
-  z-index: 900;
 }
 
 .about_desc,
@@ -465,23 +453,20 @@ body.show-header .header {
   padding: 5px 17px;
 }
 
-Для планшетов и маленьких ноутбуков
-@media (max-width: 1024px) {
-  .header {
-    width: 30%; /* Увеличиваем ширину на маленьких экранах */
-    padding-left: 30px;
-    padding-right: 30px;
+@media (min-width: 1440px) {
+  .menu::after {
+    background-color: var(--primary);
+    width: 285px;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    content: "";
+    z-index: 2;
   }
+}
 
-  .home {
-    width: calc(100% - 30%); /* Адаптируем под новую ширину сайдбара */
-    margin-left: 50px; /* Уменьшаем отступ */
-  }
-
-  .home-wrapper {
-    margin-left: 50px !important;
-    margin-right: 0 !important;
-  }
+@media (max-width: 1280px) {
 }
 
 /* Для планшетов */
@@ -502,30 +487,49 @@ body.show-header .header {
   }
 
   .home_img {
-    height: 50vh !important;
     width: 100%;
     object-fit: cover;
   }
 
   .about_info-wrapper {
-    flex-direction: column !important;
-    gap: 50px !important;
+    flex-wrap: wrap;
   }
 
   .menu_wrapper,
   .combo_wrapper {
-    flex-direction: column;
-    align-items: center;
+    flex-wrap: wrap;
   }
-
-  .desc_main {
+  .description {
+    overflow: hidden;
+    background-color: var(--bg) !important;
+    position: relative;
+    padding: 0 !important;
+    margin-bottom: 20px;
+  }
+  .description::after {
+    height: 100% !important;
+  }
+  .description_aside {
     flex-direction: column;
+    width: 90% !important;
+    margin: 0 auto;
+    padding-bottom: 30px;
+  }
+  .description_info {
+    text-align: center !important;
+  }
+  .description_img {
+    margin: 0 !important;
+  }
+  .desc_main {
     margin-left: 0 !important;
   }
 
-  .description_aside {
-    width: 90% !important;
-    margin: 0 auto;
+  .footer {
+    width: 100%;
+  }
+  .numbers {
+    display: grid;
   }
 }
 
@@ -537,15 +541,36 @@ body.show-header .header {
   .header {
     display: none !important; /* Скрываем сайдбар на мобильных */
   }
+
   .home {
     width: 100% !important;
     margin-left: 0 !important;
     flex-direction: column;
   }
 
+  .home_img {
+    height: 60vh !important;
+    object-fit: cover;
+  }
   .home_h1 {
     font-size: 32px !important;
-    margin-top: 100px !important;
+    margin-top: 20px !important;
+    margin-bottom: 40px !important;
+    text-align: center;
+  }
+
+  .home_logo::before {
+  }
+  .home-wrapper {
+    margin: 0 !important;
+    margin-left: 10px !important;
+  }
+
+  .description_img {
+    margin-left: 0px !important;
+    > img {
+      width: 50px;
+    }
   }
 
   .menu::after,
@@ -562,4 +587,142 @@ body.show-header .header {
   .combo .arrow {
     right: 36px !important;
   }
+}
+
+/* Гамбургер-меню - ПОЛНОСТЬЮ СКРЫТ НА ДЕСКТОПЕ */
+.hamburger {
+  display: none; /* Не показываем на больших экранах */
+  visibility: hidden;
+  opacity: 0;
+}
+
+/* ПОКАЗЫВАЕМ ТОЛЬКО НА МОБИЛЬНЫХ */
+@media (max-width: 768px) {
+  .home-wrapper {
+    margin-right: 0 !important;
+    margin-top: 10px;
+  }
+  .home {
+    display: grid;
+    grid-template-rows: auto 1fr;
+    height: 100vh; /* или min-height: 100vh */
+    overflow: hidden;
+  }
+  .main {
+    width: 100%;
+    margin-right: 0 !important;
+  }
+  .home_img {
+    margin-right: 0 !important;
+    height: 100%;
+  }
+  .home_h1 {
+    margin-top: 60px !important;
+    margin-bottom: 60px !important;
+  }
+  .hamburger {
+    display: flex;
+    visibility: visible;
+    opacity: 1;
+    position: fixed;
+    top: 30px;
+    right: 20px;
+    width: 44px;
+    height: 44px;
+    background-color: var(--accent);
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 1001; /* Выше сайдбара */
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    padding: 0;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 10px rgba(199, 161, 122, 0.3);
+  }
+
+  .hamburger:hover {
+    background-color: var(--primary);
+    transform: scale(1.05);
+  }
+
+  .hamburger span {
+    display: block;
+    width: 20px;
+    height: 2px;
+    background-color: white;
+    transition: all 0.3s ease;
+    border-radius: 1px;
+  }
+
+  /* Анимация в крестик при активации */
+  .hamburger.active {
+    background-color: var(--primary);
+  }
+
+  .hamburger.active span:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+  }
+
+  .hamburger.active span:nth-child(2) {
+    opacity: 0;
+  }
+
+  .hamburger.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(7px, -6px);
+  }
+
+  .about {
+    font-size: 12px !important;
+  }
+}
+/* Выпадающее меню - скрыто */
+.dropdown-menu {
+  position: fixed;
+  top: 70px; /* Отступ от верхнего края (ниже гамбургера) */
+  right: 20px;
+  width: 250px;
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+  transition: all 0.3s ease;
+  z-index: 10000;
+  overflow: hidden;
+}
+
+/* Показываем меню при active на гамбургере */
+.hamburger.active ~ .dropdown-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+/* Список меню */
+.dropdown-menu__list {
+  list-style: none;
+  padding: 15px 0;
+  margin: 0;
+}
+
+.dropdown-menu__link {
+  display: block;
+  padding: 14px 25px;
+  color: var(--primary);
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: 400;
+  transition: all 0.2s;
+  border-left: 3px solid transparent;
+}
+
+.dropdown-menu__link:hover {
+  background-color: rgba(199, 161, 122, 0.1);
+  border-left-color: var(--accent);
+  color: var(--accent);
+  padding-left: 30px;
 }
