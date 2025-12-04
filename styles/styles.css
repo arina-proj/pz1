@@ -127,7 +127,8 @@ body.show-header .header {
 }
 .main {
   background-color: var(--bg);
-  /* 100% - 22% (ширина сайдбара) */
+  
+  width: 78%;/* 100% - 22% (ширина сайдбара) */
   margin-right: 22%; /* Отступ справа под сайдбар */
   float: left; /* Обтекание слева */
   .home {
