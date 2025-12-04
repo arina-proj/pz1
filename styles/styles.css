@@ -453,6 +453,27 @@ body.show-header .header {
   padding: 5px 17px;
 }
 
+@media (max-width: 1280px) {
+  .description_aside{
+    flex-direction: column !important;
+    padding-bottom: 20px !important;
+  }
+  .description_img{
+    margin-left: 0 !important;
+    >img{
+      width: 50% !important;
+      
+    }
+  }
+  .about_info-wrapper{
+    margin-right: 20px;
+    margin-left: 20px;
+  }
+  .about_h3{
+    font-size: 18px;
+  }
+}
+
 @media (min-width: 1440px) {
   .menu::after {
     background-color: var(--primary);
@@ -466,6 +487,7 @@ body.show-header .header {
   }
 }
 
+<<<<<<< HEAD
 @media (max-width: 1280px) {
 
   .description {
@@ -498,6 +520,9 @@ body.show-header .header {
   }
   
 }
+=======
+
+>>>>>>> da325ca
 
 /* Для планшетов */
 @media (max-width: 768px) {
@@ -505,6 +530,9 @@ body.show-header .header {
     display: none; /* Скрываем сайдбар на мобильных */
   }
 
+  .about_h3{
+    font-size: 18px;
+  }
   .home {
     width: 100% !important;
     margin-left: 0 !important;
@@ -577,21 +605,43 @@ body.show-header .header {
     width: 100% !important;
     margin-left: 0 !important;
     flex-direction: column;
+    justify-content: start !important;
+    margin-bottom: 10px !important;
   }
 
+  .numbers{
+    display: none;
+  }
+  .description_img{
+    >img{
+      width: 50% !important;
+    }
+    
+  }
+
+  .about_h3{
+    font-size: 16px;
+  }
+
+  .description_aside{
+    margin: 0 !important;
+  }
+
+  .menu_point{
+    flex-direction: column;
+    padding-bottom: 30px;
+  }
   .home_img {
     height: 60vh !important;
     object-fit: cover;
   }
   .home_h1 {
     font-size: 32px !important;
-    margin-top: 20px !important;
-    margin-bottom: 40px !important;
+    margin: 0 !important;
     text-align: center;
   }
 
-  .home_logo::before {
-  }
+  
   .home-wrapper {
     margin: 0 !important;
     margin-left: 10px !important;
